@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamond — The Operant Power Mentorship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:      #0c0a0b;
+    --deep:       #171115;
+    --plum:       #3a1c32;
+    --plum-mid:   #58284a;
+    --rose:       #c4768f;
+    --rose-light: #e4b3c6;
+    --blush:      #f7eeea;
+    --cream:      #faf6f2;
+    --gold:       #c8a46a;
+    --gold-light: #e6d3ab;
+    --white:      #ffffff;
+    --text-dark:  #1a1014;
+    --text-mid:   #4a3040;
+    --text-soft:  #7a6070;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 56px;
+    background: rgba(12,10,11,0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(200,164,106,0.12);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--white); text-decoration: none; font-weight: 300;
+  }
+  .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    border: 1px solid rgba(200,164,106,0.5) !important;
+    color: var(--gold) !important;
+    padding: 10px 26px;
+    transition: all 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 55% 45%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 60%, rgba(88,40,74,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 20%, rgba(200,164,106,0.06) 0%, transparent 50%);
+  }
+  /* subtle grain */
+  .hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 180px;
+    opacity: 0.35;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 72px 100px 72px;
+    position: relative; z-index: 2;
+  }
+  .eyebrow {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 40px;
+    animation: fadeUp 1s ease both;
+  }
+  .eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+  .eyebrow-text {
+    font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 6.5vw, 88px);
+    font-weight: 300; line-height: 1.0;
+    color: var(--white); margin-bottom: 6px;
+    animation: fadeUp 1s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--rose-light); display: block;
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.45);
+    max-width: 460px; line-height: 1.6;
+    margin-bottom: 20px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-sub-line {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25); margin-bottom: 48px;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; flex-direction: column; gap: 16px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .btn-rose {
+    display: inline-block; background: var(--rose); color: var(--white);
+    padding: 18px 44px; font-size: 11px; letter-spacing: 0.24em;
+    text-transform: uppercase; font-weight: 500; text-decoration: none;
+    border: none; cursor: pointer; width: fit-content;
+    transition: background 0.3s, color 0.3s;
+  }
+  .btn-rose:hover { background: var(--rose-light); color: var(--text-dark); }
+  .hero-fine { font-size: 11px; color: rgba(255,255,255,0.28); letter-spacing: 0.1em; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+    filter: brightness(0.85) contrast(1.06) saturate(0.95);
+    mask-image: linear-gradient(to right, transparent 0%, black 18%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%);
+  }
+
+  /* ─── PULL QUOTE ─── */
+  .pull-quote {
+    background: var(--plum-mid);
+    padding: 52px 72px;
+    position: relative; overflow: hidden;
+  }
+  .pull-quote::before {
+    content: '❝';
+    position: absolute; top: -10px; left: 56px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px; color: rgba(255,255,255,0.05);
+    line-height: 1; pointer-events: none;
+  }
+  .pull-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 300; font-style: italic;
+    color: var(--white); line-height: 1.4;
+    max-width: 760px; position: relative; z-index: 1;
+  }
+  .pull-quote blockquote em {
+    font-style: normal; color: var(--rose-light); font-weight: 400;
+  }
+
+  /* ─── SHARED ─── */
+  section { padding: 104px 0; }
+  .inner { max-width: 1120px; margin: 0 auto; padding: 0 56px; }
+  .inner-narrow { max-width: 820px; margin: 0 auto; padding: 0 56px; }
+
+  .tag {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--rose); font-weight: 500; margin-bottom: 28px;
+  }
+  .tag::before { content: ''; width: 32px; height: 1px; background: currentColor; display: block; }
+  .tag-gold { color: var(--gold) !important; }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 300; line-height: 1.08;
+    color: var(--text-dark); margin-bottom: 32px;
+  }
+  h2 em { font-style: italic; color: var(--plum-mid); }
+  .on-dark { color: var(--white) !important; }
+  .on-dark em { color: var(--rose-light) !important; }
+
+  /* ─── FOR YOU ─── */
+  .for-you { background: var(--cream); }
+  .for-you-list {
+    margin-top: 48px; display: flex; flex-direction: column; gap: 0;
+  }
+  .for-you-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(92,46,80,0.1);
+    font-size: 16px; line-height: 1.7; color: var(--text-mid);
+  }
+  .for-you-item:first-child { border-top: 1px solid rgba(92,46,80,0.1); }
+  .for-you-item::before {
+    content: '◆'; color: var(--rose); font-size: 10px;
+    flex-shrink: 0; margin-top: 6px;
+  }
+
+  /* ─── WHAT DIAMOND IS ─── */
+  .what-diamond {
+    background: var(--deep); position: relative; overflow: hidden;
+  }
+  .what-diamond-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 80% 30%, rgba(88,40,74,0.3) 0%, transparent 60%);
+  }
+  .what-intro {
+    font-size: 17px; line-height: 1.85; color: rgba(255,255,255,0.45);
+    max-width: 560px; margin-bottom: 64px; margin-top: -8px;
+  }
+  .pillars {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(200,164,106,0.12);
+  }
+  .pillar {
+    background: var(--deep); padding: 48px 40px;
+    position: relative; transition: background 0.3s;
+  }
+  .pillar:hover { background: rgba(255,255,255,0.03); }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; font-weight: 300;
+    color: rgba(200,164,106,0.18); line-height: 1; margin-bottom: 24px;
+  }
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 400;
+    color: var(--white); margin-bottom: 18px; line-height: 1.2;
+  }
+  .pillar-title em { font-style: italic; color: var(--rose-light); }
+  .pillar-body {
+    font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.48);
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-it-works { background: var(--blush); }
+  .steps {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2px; margin-top: 56px;
+    background: rgba(92,46,80,0.08);
+    border: 1px solid rgba(92,46,80,0.12);
+  }
+  .step {
+    background: var(--cream); padding: 44px 40px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 300;
+    color: rgba(196,118,143,0.2); line-height: 1; margin-bottom: 20px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--text-dark); margin-bottom: 14px;
+  }
+  .step-body { font-size: 14px; line-height: 1.8; color: var(--text-mid); }
+
+  /* ─── MENTOR ─── */
+  .mentor { background: var(--cream); }
+  .mentor-grid {
+    display: grid; grid-template-columns: 420px 1fr;
+    gap: 88px; align-items: start;
+  }
+  .mentor-img-wrap { position: relative; }
+  .mentor-img-wrap::after {
+    content: ''; position: absolute;
+    bottom: -20px; right: -20px;
+    width: 100%; height: 100%;
+    border: 1px solid rgba(200,164,106,0.35); z-index: 0;
+  }
+  .mentor-img {
+    width: 100%; aspect-ratio: 3/4;
+    object-fit: cover; object-position: center top;
+    display: block; position: relative; z-index: 1;
+    filter: brightness(0.96) contrast(1.04);
+  }
+  .mentor-copy { padding-top: 12px; }
+  .mentor-copy p {
+    font-size: 16px; line-height: 1.9; color: var(--text-mid); margin-bottom: 22px;
+  }
+  .mentor-copy p strong { color: var(--text-dark); font-weight: 600; }
+  .mentor-copy p em {
+    font-style: italic; font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--plum-mid);
+  }
+
+  /* ─── INVESTMENT ─── */
+  .investment { background: var(--black); position: relative; overflow: hidden; }
+  .investment-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 10% 80%, rgba(88,40,74,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 20%, rgba(200,164,106,0.06) 0%, transparent 50%);
+  }
+  .invest-box {
+    border: 1px solid rgba(200,164,106,0.25);
+    padding: 72px 72px 64px;
+    max-width: 760px; position: relative; z-index: 1;
+  }
+  .invest-box::before {
+    content: '◆  DIAMOND';
+    position: absolute; top: -11px; left: 56px;
+    background: var(--black); padding: 0 18px;
+    font-size: 10px; letter-spacing: 0.35em;
+    color: var(--gold); font-weight: 500;
+  }
+  .invest-sub {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-bottom: 48px;
+  }
+  .price-row {
+    display: flex; gap: 20px; margin-bottom: 52px; flex-wrap: wrap;
+  }
+  .price-pill {
+    flex: 1; min-width: 180px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200,164,106,0.2);
+    padding: 32px 36px;
+  }
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 54px; font-weight: 300;
+    color: var(--white); line-height: 1; display: block; margin-bottom: 10px;
+  }
+  .price-note {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .save-tag {
+    display: inline-block; background: var(--rose);
+    color: white; font-size: 10px; letter-spacing: 0.1em;
+    padding: 4px 12px; margin-top: 10px;
+  }
+  .includes-grid {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px;
+  }
+  .incl {
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 9px 18px; letter-spacing: 0.06em;
+  }
+  .incl span { color: var(--gold); margin-right: 8px; }
+  .btn-gold {
+    display: inline-block;
+    background: transparent; border: 1px solid var(--rose);
+    color: var(--rose); padding: 18px 52px;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-gold:hover { background: var(--rose); color: var(--white); }
+
+  /* ─── FAQ ─── */
+  .faq { background: var(--blush); }
+  .faq-list { margin-top: 52px; }
+  .faq-item {
+    border-bottom: 1px solid rgba(92,46,80,0.14); padding: 30px 0;
+  }
+  .faq-item:first-child { border-top: 1px solid rgba(92,46,80,0.14); }
+  .faq-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px; font-weight: 500;
+    color: var(--text-dark); margin-bottom: 14px; line-height: 1.3;
+  }
+  .faq-a { font-size: 15px; line-height: 1.85; color: var(--text-mid); max-width: 660px; }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    background: var(--deep); text-align: center;
+    padding: 140px 56px; position: relative; overflow: hidden;
+  }
+  .final-cta-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 50%, rgba(88,40,74,0.55) 0%, transparent 65%);
+  }
+  .final-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .glyph-row { font-size: 20px; color: var(--gold); letter-spacing: 0.5em; margin-bottom: 40px; display: block; }
+  .final-cta h2 { color: var(--white); margin-bottom: 24px; }
+  .final-cta h2 em { color: var(--rose-light); font-style: italic; }
+  .final-cta p {
+    font-size: 16px; color: rgba(255,255,255,0.45); line-height: 1.75; margin-bottom: 52px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black); padding: 32px 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-logo { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 960px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 120px 28px 64px; }
+    .hero-right { height: 65vw; order: -1; }
+    .hero-img {
+      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    }
+    .pull-quote { padding: 44px 28px; }
+    .inner, .inner-narrow { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .pillars { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .mentor-grid { grid-template-columns: 1fr; gap: 48px; }
+    .mentor-img { aspect-ratio: 4/3; }
+    .invest-box { padding: 44px 28px; }
+    .price-row { flex-direction: column; }
+    footer { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Aura Vibin</a>
+  <ul class="nav-links">
+    <li><a href="#what">The Program</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#apply" class="nav-cta">Apply Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-glow"></div>
+  <div class="hero-left">
+    <div class="eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">The Operant Power — High Ticket Mentorship</span>
+    </div>
+    <h1>Diamond<em></em></h1>
+    <p class="hero-tagline">For the one who has been everything to everyone — and nothing to themselves.</p>
+    <p class="hero-sub-line">Always Open · Always Transforming</p>
+    <div class="hero-actions">
+      <a href="#apply" class="btn-rose">Apply for Your Seat</a>
+      <span class="hero-fine">Application required — when a seat opens, it's yours</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="a_high-end_luxury_photoshoot_of_a_woman_with_a_pink_outfit_long_flowing_blonde_hair_styled_in_soft__bht2dr389y8s0nw4kf2m_2.png" alt="Diamond Mentorship — Aura Vibin" class="hero-img">
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote">
+  <blockquote>"Your chaos isn't the problem. <em>It's the proof of concept.</em>"</blockquote>
+</div>
+
+<!-- FOR YOU -->
+<section class="for-you">
+  <div class="inner">
+    <div class="tag reveal">This Is For You If...</div>
+    <h2 class="reveal">You know you're meant for more —<br><em>and you're exhausted pretending you're fine.</em></h2>
+    <div class="for-you-list">
+      <div class="for-you-item reveal">You've been in relationships where you disappeared — gave everything, lost yourself, and now you're rebuilding from scratch.</div>
+      <div class="for-you-item reveal d1">You have a message, a gift, something burning inside you — but every time you try to share it, something pulls you back.</div>
+      <div class="for-you-item reveal d2">You escape. Scrolling, numbing, staying busy so you don't have to feel how much you've abandoned your own dreams.</div>
+      <div class="for-you-item reveal d3">You've tried courses, therapy, journaling — but nothing integrates. You need someone who can hold all of you at once.</div>
+      <div class="for-you-item reveal">You're ready to turn your chaos, your complicated story, your fire — into a business and a life that's entirely yours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT DIAMOND IS -->
+<section class="what-diamond" id="what">
+  <div class="what-diamond-bg"></div>
+  <div class="inner">
+    <div class="tag tag-gold reveal" style="color:var(--gold)">What Diamond Is</div>
+    <h2 class="on-dark reveal">Three transformations.<br><em>One container.</em></h2>
+    <p class="what-intro reveal">Most programs pick one thing — mindset, OR business, OR healing. Diamond integrates all three because you can't build a visible brand from a fractured identity. We do the whole thing.</p>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Emotional <em>Breakthrough</em></div>
+        <div class="pillar-body">We excavate the abandonment, the visibility wound, the relational patterns keeping you small. Not to dwell — to mine. Your pain becomes your most valuable brand asset.</div>
+      </div>
+      <div class="pillar reveal d1">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Healed <em>Identity</em></div>
+        <div class="pillar-body">Using the Operant Power framework — identity-level reprogramming, hypnosis, subconscious rewiring — you stop performing who you think you should be and start living who you actually are.</div>
+      </div>
+      <div class="pillar reveal d2">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Visibility <em>Blueprint</em></div>
+        <div class="pillar-body">A real business plan. Your niche, your offers, your content strategy, your sales system — built from the inside out. You leave with a plan you're already executing, not a folder full of notes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="inner">
+    <div class="tag reveal">How It Works</div>
+    <h2 class="reveal">Always open.<br><em>Always transforming.</em></h2>
+    <p style="font-size:17px;line-height:1.8;color:var(--text-mid);max-width:580px;margin-top:-8px;margin-bottom:0" class="reveal">Diamond isn't a course with a start date. It's a living container. You come in when you're ready, you stay as long as the work calls you to stay.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">You apply & we connect</div>
+        <div class="step-body">A simple application so I can understand where you are and confirm this is the right fit. Then we have a short conversation — not a sales call, a real one. If it's a yes, you're in.</div>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-num">2</div>
+        <div class="step-title">You enter the Diamond container</div>
+        <div class="step-body">Weekly group calls. A private community. Access to the full Operant Power framework — audios, curriculum, tools. And direct access to me.</div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num">3</div>
+        <div class="step-title">You move through the three phases at your pace</div>
+        <div class="step-body">Excavate → Alchemise → Activate. Some move fast. Some need to sit in a phase longer. The container holds all of it. There is no falling behind in Diamond.</div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num">4</div>
+        <div class="step-title">Month-to-month — you stay as long as you need</div>
+        <div class="step-body">One month minimum. No year-long lock-in unless you want it. You'll know when the work has shifted you into the next chapter. Most people stay longer than they planned — because the evolution doesn't stop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTOR -->
+<section class="mentor">
+  <div class="inner">
+    <div class="mentor-grid">
+      <div class="mentor-img-wrap reveal">
+        <img src="a_high-end_luxury_photoshoot_of_a_woman_with_a_pink_outfit_long_flowing_blonde_hair_styled_in_soft__bht2dr389y8s0nw4kf2m_2.png" alt="Aura Vibin" class="mentor-img">
+      </div>
+      <div class="mentor-copy">
+        <div class="tag reveal">Your Mentor</div>
+        <h2 class="reveal">I'm not coaching from<br><em>the mountaintop.</em></h2>
+        <p class="reveal">I'm coaching from the climb.</p>
+        <p class="reveal d1">I built the Operant Power framework from the inside out — as someone who has lived the full weight of self-abandonment, invisible pressure, and the terror of being truly seen.</p>
+        <p class="reveal d2">I understand visibility blocks at a level most coaches don't, because mine were structural, relational, and ancestral. I didn't just learn about nervous system dysregulation. <strong>I healed mine.</strong></p>
+        <p class="reveal d3">What I bring to Diamond that no one else can: <strong>the ability to see your full map</strong> — your patterns, your power, your blind spots — and hold all of it without flinching. I evolve faster than anyone I know, and I will demand the same of you.</p>
+        <p class="reveal"><em>This is my life's work. Your visibility is not optional.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section class="investment" id="investment">
+  <div class="investment-glow"></div>
+  <div class="inner">
+    <div class="tag tag-gold reveal">Your Investment</div>
+    <h2 class="on-dark reveal">What Diamond costs —<br><em>and what staying hidden costs more.</em></h2>
+    <div class="invest-box reveal">
+      <div class="invest-sub">Month-to-month mentorship · Always open · Application required</div>
+      <div class="price-row">
+        <div class="price-pill">
+          <span class="price-amount">$997</span>
+          <div class="price-note">per month</div>
+        </div>
+        <div class="price-pill">
+          <span class="price-amount">$2,500</span>
+          <div class="price-note">pay in full · 3 months</div>
+          <span class="save-tag">Save $491</span>
+        </div>
+      </div>
+      <div class="includes-grid">
+        <div class="incl"><span>◆</span> Weekly Group Calls</div>
+        <div class="incl"><span>◆</span> Private Community</div>
+        <div class="incl"><span>◆</span> Full Operant Power Framework</div>
+        <div class="incl"><span>◆</span> Sleep &amp; Hypnosis Audios</div>
+        <div class="incl"><span>◆</span> 1:1 Visibility Session</div>
+        <div class="incl"><span>◆</span> Direct Mentor Access</div>
+        <div class="incl"><span>◆</span> Visibility Blueprint</div>
+        <div class="incl"><span>◆</span> Month-to-Month Flexibility</div>
+        <div class="incl"><span>◆</span> Astrology as Your Identity Map</div>
+      </div>
+      <a href="mailto:hello@auravibin.com" class="btn-gold" id="apply">Apply for Diamond</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="inner-narrow">
+    <div class="tag reveal">Questions</div>
+    <h2 class="reveal">What people ask<br><em>before they say yes.</em></h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">Is this right for me if I don't have a business yet?</div>
+        <div class="faq-a">Yes — in fact Diamond is designed for this exact moment. We build your business from your identity, not the other way around. The people who come in with nothing built but everything felt are often the ones who move fastest.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How is this different from a course or a group program?</div>
+        <div class="faq-a">Courses give you information. Diamond gives you transformation plus a working plan. It's a living container — always running, never a countdown to a start date. You don't sit on a waitlist. You come in when you're ready.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What if I only need one month?</div>
+        <div class="faq-a">Then one month is what you take. The minimum commitment is one month. What I know from this work is that real identity shifts take time — but you are never locked in. You'll know when it's time to go, and you'll know when it's time to stay.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">I've been in toxic relationships and I'm still healing. Is it too soon?</div>
+        <div class="faq-a">Diamond was built for exactly where you are. Not when you're "healed enough." Now, while you're in it — because that fire is the most powerful fuel you have. The chaos isn't a disqualifier. It's your qualification.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do I need to know astrology to join?</div>
+        <div class="faq-a">No — I bring the astrology. You bring yourself. We use your chart as a tool for self-understanding and brand clarity, not something you need to study in advance. If you already know your placements, even better. If not, we start there together.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-glow"></div>
+  <div class="final-inner">
+    <span class="glyph-row">◆ ◆ ◆</span>
+    <h2 class="on-dark">You were never<br><em>the problem.</em></h2>
+    <p>You were in the wrong container. Diamond is where the person you've always been finally has a place to land — and a plan to match.</p>
+    <a href="mailto:hello@auravibin.com" class="btn-rose">Apply for Your Seat</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Aura Vibin — Diamond</div>
+  <div class="footer-copy">© 2026 Aura Vibin. All rights reserved.</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
